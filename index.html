@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saltycat | 閒貓科技</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="https://tt.saltycat.tw/icon.svg">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-primary: #6366f1; /* Indigo */
+            --accent-secondary: #06b6d4; /* Cyan */
+            --accent-tertiary: #8b5cf6; /* Violet */
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 20px -2px rgba(148, 163, 184, 0.12), 0 2px 8px -1px rgba(148, 163, 184, 0.08);
+            --card-shadow-hover: 0 20px 40px -15px rgba(99, 102, 241, 0.15), 0 10px 20px -10px rgba(6, 182, 212, 0.1);
+            --font-sans: 'Inter', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Subtle AI/Tech Grid Background Decor */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 600px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(6, 182, 212, 0.03) 0%, transparent 40%),
+                linear-gradient(rgba(248, 250, 252, 0) 0%, var(--bg-primary) 100%),
+                radial-gradient(rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 100;
+            transition: all var(--transition-speed);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            transition: transform var(--transition-speed);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 4px 6px rgba(99, 102, 241, 0.15));
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            background-color: rgba(226, 232, 240, 0.6);
+            padding: 4px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .lang-btn.active {
+            background-color: var(--bg-secondary);
+            color: var(--accent-primary);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+        }
+
+        main {
+            flex-grow: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem auto;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            padding: 6px 16px;
+            border-radius: 30px;
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-primary);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+        }
+
+        .hero h1 span.gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 50%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 620px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Grid Section */
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .sites-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            .hero p {
+                font-size: 1.05rem;
+            }
+            main {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        /* Card Styles */
+        .site-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: var(--card-shadow);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Border top glow effect on hover */
+        .site-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .site-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(99, 102, 241, 0.25);
+        }
+
+        .site-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(99, 102, 241, 0.05);
+            color: var(--accent-primary);
+            transition: all var(--transition-speed);
+        }
+
+        /* Color variations for card icons */
+        .site-card.news .icon-wrapper {
+            background-color: rgba(139, 92, 246, 0.05);
+            color: var(--accent-tertiary);
+        }
+        .site-card.email .icon-wrapper {
+            background-color: rgba(6, 182, 212, 0.05);
+            color: var(--accent-secondary);
+        }
+        .site-card.people .icon-wrapper {
+            background-color: rgba(99, 102, 241, 0.05);
+            color: var(--accent-primary);
+        }
+
+        .site-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .card-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background-color: #f1f5f9;
+            color: #64748b;
+            transition: all var(--transition-speed);
+        }
+
+        .site-card:hover .card-badge {
+            background-color: rgba(99, 102, 241, 0.08);
+            color: var(--accent-primary);
+        }
+
+        .card-body h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-body p {
+            color: var(--text-secondary);
+            font-size: 0.975rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--accent-primary);
+            gap: 6px;
+            transition: gap var(--transition-speed);
+        }
+
+        .site-card:hover .card-footer {
+            color: var(--accent-tertiary);
+            gap: 12px;
+        }
+
+        .card-footer svg {
+            width: 18px;
+            height: 18px;
+            transition: transform var(--transition-speed);
+        }
+
+        .site-card:hover .card-footer svg {
+            transform: translateX(4px);
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        .footer-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="https://tt.saltycat.tw/icon.svg" alt="Saltycat Logo">
+                <span class="logo-text">Saltycat</span>
+            </a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('zh')" id="btn-zh">繁體中文</button>
+                <button class="lang-btn" onclick="setLang('en')" id="btn-en">English</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <div class="badge-pill">
+                <span class="badge-dot"></span>
+                <span id="hero-badge">AI & Blockchain Ecosystem</span>
+            </div>
+            <h1 id="hero-title">探索 <span class="gradient-text">Saltycat</span> 數位生態圈</h1>
+            <p id="hero-subtitle">由 AI 技術驅動、區塊鏈安全存證，為您提供輕巧、高效且貼近生活的數位實用體驗。</p>
+        </div>
+
+        <div class="sites-grid">
+            <!-- Site 1: Digital Tool -->
+            <a href="https://tt.saltycat.tw/" target="_blank" class="site-card tt">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-wrapper">
+                            <!-- Tattoo / Tools SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </div>
+                        <span class="card-badge">AI & Blockchain</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title-tt">數位小工具</h2>
+                        <p class="card-desc-tt">實用的區塊鏈與 AI 工具集合，提供安全且永不消失的「數位刺青」區塊鏈存證，以及趣味盎然的 AI 「超級合體」圖像融合服務。</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-btn-tt">立即探索小工具</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- Site 2: News Weekly -->
+            <a href="https://news.saltycat.tw/" target="_blank" class="site-card news">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-wrapper">
+                            <!-- Newspaper SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/></svg>
+                        </div>
+                        <span class="card-badge">AI Operation</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title-news">智人週刊</h2>
+                        <p class="card-desc-news">台灣第一個完全由 AI 運營的雜誌週刊，徵求人類投稿，並能讓 AI 記者為您進行深度專訪與報導撰寫，探索智人時代的故事。</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-btn-news">開始閱讀週刊</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- Site 3: Email service -->
+            <a href="https://email.saltycat.tw/" target="_blank" class="site-card email">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-wrapper">
+                            <!-- Mail forwarding SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h9"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/><path d="M18 16l4 4-4 4"/><path d="M22 20h-6"/></svg>
+                        </div>
+                        <span class="card-badge">Core Utility</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title-email">閒貓電郵</h2>
+                        <p class="card-desc-email">台灣 CP 值最高的自訂網域郵件轉寄服務，免去高昂企業月費，輕鬆將您的專屬網域郵件 100% 完美且安全地轉寄至個人 Gmail。</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-btn-email">啟用信箱轉寄</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- Site 4: People profiles -->
+            <a href="https://people.saltycat.tw/" target="_blank" class="site-card people">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-wrapper">
+                            <!-- People/User group SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <span class="card-badge">Community</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title-people">智人人物誌</h2>
+                        <p class="card-desc-people">AI 時代下的人類故事專欄，記錄每一位受訪者與 AI 共同編織的獨特生活軌跡、科技見解與人生故事，深度展現人文足跡。</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-btn-people">瀏覽人物專欄</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Saltycat 閒貓科技. All rights reserved.</p>
+                <p style="font-size: 0.8rem; opacity: 0.8;">陞和姍科技商號 | 統一編號: 61263535</p>
+            </div>
+            <div class="footer-right">
+                <a href="mailto:cs@saltycat.tw" class="footer-link">與我們聯繫：cs@saltycat.tw</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            zh: {
+                heroBadge: "AI & Blockchain Ecosystem",
+                heroTitle: "探索 <span class='gradient-text'>Saltycat</span> 數位生態圈",
+                heroSubtitle: "由 AI 技術驅動、區塊鏈安全存證，為您提供輕巧、高效且貼近生活的數位實用體驗。",
+                
+                titleTT: "數位小工具",
+                descTT: "實用的區塊鏈與 AI 工具集合，提供安全且永不消失的「數位刺青」區塊鏈存證，以及趣味盎然的 AI 「超級合體」圖像融合服務。",
+                btnTT: "立即探索小工具",
+                
+                titleNews: "智人週刊",
+                descNews: "台灣第一個完全由 AI 運營的雜誌週刊，徵求人類投稿，並能讓 AI 記者為您進行深度專訪與報導撰寫，探索智人時代的故事。",
+                btnNews: "開始閱讀週刊",
+                
+                titleEmail: "閒貓電郵",
+                descEmail: "台灣 CP 值最高的自訂網域郵件轉寄服務，免去高昂企業月費，輕鬆將您的專屬網域郵件 100% 完美且安全地轉寄至個人 Gmail。",
+                btnEmail: "啟用信箱轉寄",
+                
+                titlePeople: "智人人物誌",
+                descPeople: "AI 時代下的人類故事專欄，記錄每一位受訪者與 AI 共同編織的獨特生活軌跡、科技見解與人生故事，深度展現人文足跡。",
+                btnPeople: "瀏覽人物專欄"
+            },
+            en: {
+                heroBadge: "AI & Blockchain Ecosystem",
+                heroTitle: "Explore the <span class='gradient-text'>Saltycat</span> Ecosystem",
+                heroSubtitle: "Powered by AI and secured by blockchain. Discover our collection of lightweight, efficient, and practical digital experiences designed for everyday life.",
+                
+                titleTT: "Digital Tool",
+                descTT: "A collection of practical blockchain and AI tools, featuring immutable blockchain 'Digital Tattoo' ledger proof and fun AI 'Super Merge' image fusion.",
+                btnTT: "Explore Digital Tools",
+                
+                titleNews: "Homo Sapiens Weekly",
+                descNews: "Taiwan's first fully AI-operated weekly magazine. Submit your stories or have our professional AI reporters interview you and write the articles.",
+                btnNews: "Read Homo Sapiens Weekly",
+                
+                titleEmail: "Saltycat Mailservice",
+                descEmail: "Taiwan's most cost-effective custom domain email forwarding service. Easily and securely forward custom domain emails directly to your Gmail.",
+                btnEmail: "Set Up Email Forwarding",
+                
+                titlePeople: "Homo Sapiens Profiles",
+                descPeople: "An AI-era human story column recording the unique life trajectories, tech insights, and narratives co-created by interviewees and AI storytellers.",
+                btnPeople: "Browse Human Profiles"
+            }
+        };
+
+        function setLang(lang) {
+            // Update active buttons
+            document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            
+            // Set html lang attribute
+            document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+
+            // Apply translations
+            const t = translations[lang];
+            document.getElementById('hero-badge').innerText = t.heroBadge;
+            document.getElementById('hero-title').innerHTML = t.heroTitle;
+            document.getElementById('hero-subtitle').innerText = t.heroSubtitle;
+
+            document.querySelector('.card-title-tt').innerText = t.titleTT;
+            document.querySelector('.card-desc-tt').innerText = t.descTT;
+            document.querySelector('.card-btn-tt').innerText = t.btnTT;
+
+            document.querySelector('.card-title-news').innerText = t.titleNews;
+            document.querySelector('.card-desc-news').innerText = t.descNews;
+            document.querySelector('.card-btn-news').innerText = t.btnNews;
+
+            document.querySelector('.card-title-email').innerText = t.titleEmail;
+            document.querySelector('.card-desc-email').innerText = t.descEmail;
+            document.querySelector('.card-btn-email').innerText = t.btnEmail;
+
+            document.querySelector('.card-title-people').innerText = t.titlePeople;
+            document.querySelector('.card-desc-people').innerText = t.descPeople;
+            document.querySelector('.card-btn-people').innerText = t.btnPeople;
+        }
+
+        // Auto-detect browser language
+        window.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('en')) {
+                setLang('en');
+            } else {
+                setLang('zh');
+            }
+        });
+    </script>
+</body>
+</html>
