@@ -447,12 +447,33 @@
                 <span class="badge-dot"></span>
                 <span id="hero-badge">AI & Blockchain Ecosystem</span>
             </div>
-            <h1 id="hero-title">探索 <span class="gradient-text">Saltycat</span> 數位生態圈</h1>
+            <h1 id="hero-title"><span class="gradient-text">AI</span>開發營運的網路服務</h1>
             <p id="hero-subtitle">由 AI 技術驅動、區塊鏈安全存證，為您提供輕巧、高效且貼近生活的數位實用體驗。</p>
         </div>
 
         <div class="sites-grid">
-            <!-- Site 1: Digital Tool -->
+            <!-- Site 1: Citizen Record Search -->
+            <a href="https://people.saltycat.tw/" target="_blank" class="site-card people">
+                <div>
+                    <div class="card-top">
+                        <div class="icon-wrapper">
+                            <!-- People/User group SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <span class="card-badge">Community</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title-people">良民查詢</h2>
+                        <p class="card-desc-people">幫你用名字查此人是否為良民（有無犯罪記錄）</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="card-btn-people">立即查詢</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <!-- Site 2: Digital Tool -->
             <a href="https://tt.saltycat.tw/" target="_blank" class="site-card tt">
                 <div>
                     <div class="card-top">
@@ -473,7 +494,7 @@
                 </div>
             </a>
 
-            <!-- Site 2: News Weekly -->
+            <!-- Site 3: News Weekly -->
             <a href="https://news.saltycat.tw/" target="_blank" class="site-card news">
                 <div>
                     <div class="card-top">
@@ -494,7 +515,7 @@
                 </div>
             </a>
 
-            <!-- Site 3: Email service -->
+            <!-- Site 4: Email service -->
             <a href="https://email.saltycat.tw/" target="_blank" class="site-card email">
                 <div>
                     <div class="card-top">
@@ -511,27 +532,6 @@
                 </div>
                 <div class="card-footer">
                     <span class="card-btn-email">啟用信箱轉寄</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </div>
-            </a>
-
-            <!-- Site 4: People profiles -->
-            <a href="https://people.saltycat.tw/" target="_blank" class="site-card people">
-                <div>
-                    <div class="card-top">
-                        <div class="icon-wrapper">
-                            <!-- People/User group SVG Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
-                        <span class="card-badge">Community</span>
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title-people">智人人物誌</h2>
-                        <p class="card-desc-people">AI 時代下的人類故事專欄，記錄每一位受訪者與 AI 共同編織的獨特生活軌跡、科技見解與人生故事，深度展現人文足跡。</p>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <span class="card-btn-people">瀏覽人物專欄</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
             </a>
@@ -554,7 +554,7 @@
         const translations = {
             zh: {
                 heroBadge: "AI & Blockchain Ecosystem",
-                heroTitle: "探索 <span class='gradient-text'>Saltycat</span> 數位生態圈",
+                heroTitle: "<span class='gradient-text'>AI</span>開發營運的網路服務",
                 heroSubtitle: "由 AI 技術驅動、區塊鏈安全存證，為您提供輕巧、高效且貼近生活的數位實用體驗。",
                 
                 titleTT: "數位小工具",
@@ -569,13 +569,13 @@
                 descEmail: "台灣 CP 值最高的自訂網域郵件轉寄服務，免去高昂企業月費，輕鬆將您的專屬網域郵件 100% 完美且安全地轉寄至個人 Gmail。",
                 btnEmail: "啟用信箱轉寄",
                 
-                titlePeople: "智人人物誌",
-                descPeople: "AI 時代下的人類故事專欄，記錄每一位受訪者與 AI 共同編織的獨特生活軌跡、科技見解與人生故事，深度展現人文足跡。",
-                btnPeople: "瀏覽人物專欄"
+                titlePeople: "良民查詢",
+                descPeople: "幫你用名字查此人是否為良民（有無犯罪記錄）",
+                btnPeople: "立即查詢"
             },
             en: {
                 heroBadge: "AI & Blockchain Ecosystem",
-                heroTitle: "Explore the <span class='gradient-text'>Saltycat</span> Ecosystem",
+                heroTitle: "Web Services Developed & Operated by <span class='gradient-text'>AI</span>",
                 heroSubtitle: "Powered by AI and secured by blockchain. Discover our collection of lightweight, efficient, and practical digital experiences designed for everyday life.",
                 
                 titleTT: "Digital Tool",
@@ -590,9 +590,9 @@
                 descEmail: "Taiwan's most cost-effective custom domain email forwarding service. Easily and securely forward custom domain emails directly to your Gmail.",
                 btnEmail: "Set Up Email Forwarding",
                 
-                titlePeople: "Homo Sapiens Profiles",
-                descPeople: "An AI-era human story column recording the unique life trajectories, tech insights, and narratives co-created by interviewees and AI storytellers.",
-                btnPeople: "Browse Human Profiles"
+                titlePeople: "Good Citizen Search",
+                descPeople: "Search by name to check if a person is a good citizen (whether they have a criminal record).",
+                btnPeople: "Search Now"
             }
         };
 
